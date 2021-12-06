@@ -12,7 +12,7 @@ export default function SignUp() {
     //render
     return (
       <>
-        <h1 className="text-green-500">Welcome to the Hackathon Project</h1>
+        <h1 className="text-green-500">Welcome to the Website Index</h1>
       </>
     )
   }
