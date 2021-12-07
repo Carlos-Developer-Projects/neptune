@@ -1,11 +1,11 @@
 //dependencies
 import { useEffect } from "react";
 //layout
-import Dashboard from "../../src/layout/Dashboard";
+import Dashboard from '../../src/layouts/dashboard';
 //components
-import Meta from "../../src/components/components/Meta";
-import PageHeader from "../../src/components/components/PageHeader";
-import SectionHeader from "../../src/components/components/SectionHeader";
+import Meta from "../../src/components/global/Meta";
+import PageHeader from "../../src/components/dashboard/PageHeader";
+import SectionHeader from "../../src/components/dashboard/SectionHeader";
 import MainContainer from "../../src/components/dashboard/mainContainer";
 //data
 import { theme } from "../../data/theme";
