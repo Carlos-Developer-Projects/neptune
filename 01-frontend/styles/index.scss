@@ -1,5 +1,19 @@
+:root {
+    --main: #6f0000;
+    --dark: #200122;
+}
+
 .bg-gradient{
     background: #200122;
     background: -webkit-linear-gradient(to bottom, #200122, #6f0000);
     background: linear-gradient(to bottom, #200122, #6f0000);
+}
+
+
+.bg-main{
+    background-color: var(--main);
+}
+
+.bg-main-dark{
+    background-color: var(--dark);
 }
