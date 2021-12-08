@@ -20,6 +20,7 @@ export default function(){
     const[email, setEmail] = useState("");
     const[password, setPassword] = useState("");
     const[username, setUsername] = useState("");
+    const alternateRoute = "/auth/signin";
     //functions
     const handleSubmit = async (e)=>{
         e.preventDefault();
@@ -62,9 +63,11 @@ export default function(){
 
                     <div className="flex items-center justify-between">
                     <div className="text-sm">
-                        <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                        Forgot your password?
-                        </a>
+                        <Link href="/auth/reset">
+                            <a className="font-medium text-indigo-600 hover:text-indigo-500">
+                                Forgot your password?
+                            </a>
+                        </Link>
                     </div>
                     </div>
 
@@ -73,7 +76,7 @@ export default function(){
 
                 <div className="flex items-center justify-between mt-10">
                     <div className="text-sm">
-                        <Link href="/auth/signin">
+                        <Link href={alternateRoute}>
                         <a className="font-medium text-indigo-600 hover:text-indigo-500">Already a member? Sign in here.</a>
                         </Link>
                     </div>
