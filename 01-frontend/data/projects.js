@@ -2,7 +2,7 @@ export const dummy_projects = [
     {
         id: "1234",
         status: "live",
-        image: "https://via.placeholder.com/300x300",
+        image: "https://via.placeholder.com/300x250",
         name: "New Game",
         description: "Nam posuere nec nisl accumsan tincidunt. Vestibulum eget felis odio. Nullam rhoncus consequat massa, quis vulputate neque sollicitudin vitae.",
         tags: [
@@ -19,7 +19,7 @@ export const dummy_projects = [
     {
         id: "1234",
         status: "live",
-        image: "https://via.placeholder.com/300x300",
+        image: "https://via.placeholder.com/300x250",
         name: "New Game",
         description: "Nam posuere nec nisl accumsan tincidunt. Vestibulum eget felis odio. Nullam rhoncus consequat massa, quis vulputate neque sollicitudin vitae.",
         tags: [
@@ -36,7 +36,7 @@ export const dummy_projects = [
     {
         id: "1234",
         status: "live",
-        image: "https://via.placeholder.com/300x300",
+        image: "https://via.placeholder.com/300x250",
         name: "New Game",
         description: "Nam posuere nec nisl accumsan tincidunt. Vestibulum eget felis odio. Nullam rhoncus consequat massa, quis vulputate neque sollicitudin vitae.",
         tags: [
