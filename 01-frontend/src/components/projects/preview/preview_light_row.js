@@ -5,9 +5,9 @@ export default function PreviewLightRow({projects_data}){
     //state
     //functions
     const renderProjects = (items)=>{
-        const render = items.map((item)=>{
+        const render = items.map((item, index)=>{
             return(
-                <div>
+                <div key={index}>
                     <Projects.Wrapper id={item.id}>
                         <Projects.Status text={item.status} />
                         <Projects.Image imageSrc={item.image} imageAlt={item.name} />
