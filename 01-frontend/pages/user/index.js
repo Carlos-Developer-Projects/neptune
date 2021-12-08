@@ -7,8 +7,10 @@ import Meta from "../../src/components/global/Meta";
 import PageHeader from "../../src/components/dashboard/PageHeader";
 import SectionHeader from "../../src/components/dashboard/SectionHeader";
 import MainContainer from "../../src/components/dashboard/mainContainer";
+import PreviewLightRow from "../../src/components/projects/preview/preview_light_row";
 //data
 import { theme } from "../../data/theme";
+import { dummy_projects } from "../../data/projects";
 const crumbs = [
     {
       "text": "Home",
@@ -21,6 +23,9 @@ export default function(){
     //state
     //functions
     //lifecycle
+    useEffect(()=>{
+
+    },[]);
     //render
     return(
         <>
@@ -29,6 +34,7 @@ export default function(){
                 <PageHeader theme={theme} title="User Dashboard" crumbs={crumbs} />
                 <MainContainer>
                     <SectionHeader title="Latest Projects" />
+                    <PreviewLightRow projects_data={dummy_projects} />
                 </MainContainer>
             </Dashboard>
         </>
