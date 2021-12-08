@@ -26,3 +26,17 @@ As I go along, I am updating serveral sections of the repositoy documents to let
 
 Here is a constantly updating list of technogy the app plans to use.
 
+- Front End - NextJS
+- Augmented Reality - AR.JS
+- Three Dimensions on the Web - Three.js
+- User management and storage - Moralis
+- Smart Contracts - Solidity
+- Blockhain - Avalanche
+- Analytics - Google Analytics
+- Email Management and Alerts - SendGrid
+- Hosting - Amazon Web Services
+- Cloud Functions - Moralis
+- Serverless Lambda Functions - Amazon Web Services
+- File Storage - IPFS
+- Crypto Wallet - MetaMask
+- UI Framework - Tailwind UI
