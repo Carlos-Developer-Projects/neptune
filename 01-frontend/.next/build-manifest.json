@@ -30,6 +30,11 @@
       "static/chunks/main.js",
       "static/chunks/pages/auth.js"
     ],
+    "/auth/signin": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/auth/signin.js"
+    ],
     "/user": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
