@@ -30,11 +30,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/auth.js"
     ],
-    "/auth/reset": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/auth/reset.js"
-    ],
     "/user": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

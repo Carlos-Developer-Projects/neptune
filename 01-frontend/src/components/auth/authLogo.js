@@ -1,12 +1,12 @@
+//components
+import AuthImg from "./img";
+//component
 export default function AuthLogo({title}){
+    //render
     return(
         <div>
-            <img
-                className="h-12 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                alt="Neptune Chain Services"
-            />
-            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">{title}</h2>
+            <AuthImg />
+            <h2 className="mt-12 text-3xl font-extrabold text-white">{title}</h2>
         </div>
     )
 }

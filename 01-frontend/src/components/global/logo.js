@@ -1,4 +1,4 @@
-export default function Logo(){
+export default function Logo({max}){
     return(
         <>
              <style jsx>{`

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 //layout
 import Dashboard from '../../src/layouts/dashboard';
 //components
-import Meta from "../../src/components/global/Meta";
+import Meta from "../../src/components/global/meta";
 import PageHeader from "../../src/components/dashboard/PageHeader";
 import SectionHeader from "../../src/components/dashboard/SectionHeader";
 import MainContainer from "../../src/components/dashboard/mainContainer";

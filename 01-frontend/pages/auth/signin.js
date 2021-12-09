@@ -60,7 +60,7 @@ export default function(){
                     <div className="flex items-center justify-between">
                     <div className="text-sm">
                         <Link href="/auth/reset">
-                            <a className="font-medium text-indigo-600 hover:text-indigo-500">
+                            <a className="font-medium text-white hover:text-indigo-500">
                             Forgot your password?
                             </a>
                         </Link>
@@ -73,7 +73,7 @@ export default function(){
                 <div className="flex items-center justify-between mt-10">
                     <div className="text-sm">
                         <Link href={alternateRoute}>
-                        <a className="font-medium text-indigo-600 hover:text-indigo-500">Not a member yet? Sign up here.</a>
+                        <a className="font-medium text-white hover:text-indigo-500">Not a member yet? Sign up here.</a>
                         </Link>
                     </div>
                     </div>
