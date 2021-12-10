@@ -16,3 +16,16 @@
 .bg-main-dark{
     background-color: var(--dark);
 }
+
+.bg-button{
+    background-color: var(--main);
+    &:hover{
+        background-color: var(--dark);
+    }
+}
+
+.bg-button-gradient{
+    background: #200122;
+    background: -webkit-linear-gradient(to bottom, #6f0000, #200122);
+    background: linear-gradient(to bottom, #6f0000, #200122);
+}

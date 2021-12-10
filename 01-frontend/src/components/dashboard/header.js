@@ -18,7 +18,7 @@ export default function Header({setSidebarOpen}){
     };
     //render
     return(
-        <div className="relative z-10 flex-shrink-0 flex h-16 bg-white border-b bg-gray-900 border-gray-200 lg:border-none">
+        <div className="relative z-10 flex-shrink-0 flex h-16 border-b bg-gray-900 border-gray-200 lg:border-none">
 
             <button
               type="button"
