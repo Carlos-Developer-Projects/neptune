@@ -38,7 +38,7 @@ export default function AuthDisplay(){
             <div className="hidden h-screen relative lg:block relative flex-1 bg-gray-50">
                
                 <video ref={vidRef} autoplay muted loop id="myVideo">
-                    <source src="/vid/signup.mp4" type="video/mp4" />
+                    <source src="/vid/bg-compressed.mp4" type="video/mp4" />
                     Your browser does not support HTML5 video.
                 </video>
                 <div className="overlay-bg bg-gradient"></div>
