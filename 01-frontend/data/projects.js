@@ -51,3 +51,5 @@ export const dummy_projects = [
         ]
     }
 ];
+
+export const rule_cards = [];

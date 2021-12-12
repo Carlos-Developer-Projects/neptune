@@ -1,5 +1,6 @@
 //components
-import Button from "../../elements/button"
+import Button from "../../elements/button";
+import { AiOutlinePlus, AiOutlineEdit } from 'react-icons/ai';
 //component
 export default function Rule(props){
     //render
@@ -13,8 +14,8 @@ export default function Rule(props){
                 <props.icon className="text-9xl mx-auto" />
                 <p className="mt-3 mb-3">{props.description}</p>
                 <div className="rule-actions flex items-center justify-between mt-6">
-                    <Button handleClick={props.create} text="Create" custom="bg-button" />
-                    <Button handleClick={props.manage} text="Manage" custom="bg-button" />
+                    <Button handleClick={props.create} text="Create" custom="bg-button" icon={AiOutlinePlus} handleClick={()=>{props.edit(props.type)}} />
+                    <Button handleClick={props.manage} text="Manage" custom="bg-button" icon={AiOutlineEdit} handleClick={()=>{props.manage(props.type)}} />
                 </div>
             </div>
         </>

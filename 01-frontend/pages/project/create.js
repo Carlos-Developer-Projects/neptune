@@ -1,5 +1,5 @@
 //depedencies
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { v4 as uuidv4 } from 'uuid';
 //layout
 import Dashboard from "../../src/layouts/dashboard";
@@ -12,6 +12,9 @@ import ToggleArea from "../../src/components/dashboard/toggleArea";
 import Button from "../../src/components/elements/button";
 import TransitionArea from "../../src/components/dashboard/transtionArea";
 import Rule from "../../src/components/projects/editor/rule";
+
+import RuleEditor from "../../src/components/projects/editor/ruleEditor";
+
 //icons
 import {GiCardDraw} from 'react-icons/gi';
 //components
@@ -42,6 +45,14 @@ const masterCopy = {
 //page
 export default function(){
     //state
+    const[ruleCards, setRulesCards] = useState([
+        {
+            icon: GiCardDraw,
+            name: "Decks",
+            description: "Decks of cards are a major staple in most modern games.",
+            count: 0
+        }
+    ]);
     const[currentTab, setCurrentTab] = useState("Rules & Settings");
     const[rules, setRules]= useState([]);
     const[rulesSettings, setRulesSettings] = useState({});
@@ -155,6 +166,17 @@ export default function(){
     };
 
     //Rules settings
+    const renderRuleCards = useMemo(()=>{
+
+        if(ruleCards.length === 0) return;
+
+        const render = ruleCards.map((card, index)=>{
+            return(<Rule key={index} icon={card.icon} name={card.name} count={card.count} description={card.description} />);
+        });
+        return render;
+
+    }, [ruleCards]);
+
     const updateRule = (updateState)=>{
         const updateRuleSettings = {...rulesRef.current};
         updateRuleSettings[updateState.id] = updateState;
@@ -312,11 +334,11 @@ export default function(){
                                     <p className="mb-4 max-w-4xl">{masterCopy.rules.intro}</p>
                                 </div>
 
-                                <section id="game-rules" className="flex items-center flex-wrap">
-                                    <Rule icon={GiCardDraw} name="Decks" count={0} description="Decks of cards are a major staple in most modern games." />
-                                </section>
+                                <RuleEditor state={{
+                                    memory: {}
+                                }} />
 
-                                <section id="settings-type" className="mt-3 mb-3 flex items-center justify-start">
+                                {/* <section id="settings-type" className="mt-3 mb-3 flex items-center justify-start">
                                     <Button text="Rule" handleClick={addRule} custom="bg-button" />
                                     <Button text="Player Actions" handleClick={()=>{}} custom="ml-3 bg-button" />
                                     <Button text="Card Deck" handleClick={()=>{}} custom="ml-3 bg-button" />
@@ -325,7 +347,7 @@ export default function(){
                                     <Button text="Element Types" handleClick={()=>{}} custom="ml-3 bg-button" />
                                     <Button text="Turn Phases" handleClick={()=>{}} custom="ml-3 bg-button" />
                                     <Button text="Board Regions" handleClick={()=>{}} custom="ml-3 bg-button" />
-                                </section>
+                                </section> */}
 
                                 {rules.length > 0 && renderRules(rules)}
                             </TransitionArea>
