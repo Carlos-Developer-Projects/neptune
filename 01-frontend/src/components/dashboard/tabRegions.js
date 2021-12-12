@@ -13,7 +13,7 @@ export default function TabRegions({tabs, currentTab, setTabs}) {
           <select
             id="tabs"
             name="tabs"
-            className="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+            className="block w-full focus:ring-red-500 focus:border-red-500 border-gray-300 rounded-md"
             defaultValue={currentTab}
           >
             {tabs.map((tab) => (
@@ -31,7 +31,7 @@ export default function TabRegions({tabs, currentTab, setTabs}) {
                   onClick={(e)=>{setTabs(e.target.id)}}
                   className={classNames(
                     tab.name === currentTab
-                      ? 'border-indigo-500 text-indigo-600'
+                      ? 'border-red-800 text-red-800'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
                     'w-1/4 py-4 px-1 text-left border-b-2 font-medium text-sm'
                   )}

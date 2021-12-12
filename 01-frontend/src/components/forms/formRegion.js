@@ -23,6 +23,16 @@ export default function FormRegion({settings, setRegionData, saveSection, initia
             payload: e.target.value
         });
     };
+    const handleChangeFile = (e)=>{
+        dispatch({
+            type: "change",
+            field: e.target.id,
+            payload: event.target.files[0]
+        });
+    };
+    const handleChangeList = (e)=>{
+        
+    };
     const renderFields = (field)=>{
         switch(field.type){
             case "text":
@@ -38,11 +48,10 @@ export default function FormRegion({settings, setRegionData, saveSection, initia
             case "file":
                 return <Forms.InputFile 
                     type={field.type} 
-                    value={state[field.id]} 
                     name={field.name}
                     id={field.id}
                     settings={field.settings} 
-                    handleChange={handleChange}
+                    handleChange={handleChangeFile}
                 />;
             case "textarea":
                 return <Forms.TextArea 
@@ -68,10 +77,10 @@ export default function FormRegion({settings, setRegionData, saveSection, initia
         }
     };
     const renderFieldGroups = (fields)=>{
-        const render = fields.map((field)=>{
+        const render = fields.map((field, index)=>{
             return(
                 <Forms.Group 
-                    key={field.id} 
+                    key={index} 
                     prefix={field.prefix ? field.prefix : undefined} 
                     message={field.message ? field.message: undefined}
                     label={field.label} 
@@ -95,6 +104,7 @@ export default function FormRegion({settings, setRegionData, saveSection, initia
                 intro={settings.meta.intro}
                 cta={settings.meta.cta}
                 handleClick={saveSection} 
+                currentState={state}
             >
                 {renderFieldGroups(settings.fields)}
             </Forms.Section>

@@ -32,3 +32,7 @@
     background: -webkit-linear-gradient(to bottom, #6f0000, #200122);
     background: linear-gradient(to bottom, #6f0000, #200122);
 }
+
+.border-bottom-main{
+    border-bottom: 2px solid var(--main);
+}
