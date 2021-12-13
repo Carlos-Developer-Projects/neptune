@@ -2,57 +2,12 @@
 import { useState, useMemo, useReducer, useRef, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 //components
-import Rule from "./rule";
+import RuleCard from "./rule";
 import ToggleArea from "../../dashboard/toggleArea";
 import FormRegion from "../../forms/formRegion";
-import {GiCardDraw, GiNautilusShell} from 'react-icons/gi';
+
 //data
-const ruleTypes = {
-    decks: {
-        name: "decks",
-        schema: {
-            meta: {
-                id: "",
-                name: "New Deck",
-                intro: "Enter the settings for your deck.",
-                cta: "Save Deck"
-            },
-            state: {
-                type:"decks",
-                name: "",
-                icon: "",
-            },
-            fields: [
-                {
-                    id: "name",
-                    label: "Name",
-                    required: true,
-                    type: "text",
-                    placholder: "Name your deck.",
-                    settings: {},
-                    message: "Name of the rule."
-                },
-                {
-                    id: "icon",
-                    label: "Deck Icon (optional)",
-                    required: false,
-                    type: "file",
-                    settings: {},
-                    message: "Icon that represents your rule."
-                }
-            ]
-        }
-    },
-    cards:{
-        decks: {
-            icon: GiCardDraw,
-            type: "decks",
-            name: "Decks",
-            description: "Decks of cards are a major staple in most modern games.",
-            count: 0
-        }
-    }
-};
+import { ruleTypes } from "../../../../data/projects";
 
 //component
 export default function RuleEditor(props){
@@ -60,9 +15,13 @@ export default function RuleEditor(props){
     const[state, dispatch] = useReducer(reducer, props.state);
     const rulesRef = useRef();
     rulesRef.current = state;
+    const[ruleCards, setRulesCards] = useState({});
+
     const[editorActive, setEditorActive] = useState(false);
     const[activeEditor, setActiveEditor] = useState({});
-    const[ruleCards, setRulesCards] = useState({});
+
+    const[managerActive, setManagerActive] = useState(false);
+    const[activeManager, setActiveManager] = useState("");
 
     //functions
     function reducer(state, action){
@@ -121,25 +80,26 @@ export default function RuleEditor(props){
         if(ruleCards.length === 0) return;
 
         const render = Object.values(ruleCards).map((card, index)=>{
-            return(<Rule 
+            return(<RuleCard 
                 key={index} 
                 icon={card.icon} 
                 name={card.name} 
                 type={card.type}
+                design={card.design}
                 count={state.memory[card.type].count} 
                 description={card.description} 
                 edit={addRule}
-                manage={deleteRule}
+                manage={manageRules}
             />);
         });
         return render;
 
     }, [ruleCards]);
 
-    function addRule(name){
+    function addRule(type){
 
         //get rule master settings
-        const masterSettings = {...ruleTypes[name]};
+        const masterSettings = {...ruleTypes[type]};
         const newid = uuidv4();
         masterSettings.schema.meta.id = newid;
         masterSettings.schema.state.id = newid;
@@ -154,8 +114,11 @@ export default function RuleEditor(props){
 
     }
 
-    function manageRules(name){
-        alert(name);
+    function manageRules(type){
+
+        setActiveManager(type);
+        setManagerActive(true);
+
     }
 
     function deleteRule(){
@@ -183,9 +146,46 @@ export default function RuleEditor(props){
         setActiveEditor({});
     }
 
-    function createRule(){
+    const renderEditor = ()=>{
+        return(
+            <ToggleArea title={`Name: ${state.memory[activeEditor.schema.meta.type].items[activeEditor.schema.meta.id] ? state.memory[activeEditor.schema.meta.type].items[activeEditor.schema.meta.id].name : activeEditor.schema.meta.name}`}>{
+                <FormRegion 
+                    settings={activeEditor.schema} 
+                    initialState={state.memory[activeEditor.name] && state.memory[activeEditor.name].items && state.memory[activeEditor.name].items[activeEditor.schema.meta.id] ?  state.memory[activeEditor.name].items[activeEditor.schema.meta.id] : activeEditor.schema.state} 
+                    setRegionData={updateMemory} 
+                    saveSection={saveRule}  
+                />
+            }</ToggleArea>
+        )
+    };
 
-    }
+    const renderManager = ()=>{
+        const render = Object.values(state.memory[activeManager].items).map((item)=>{
+
+            const manageSettings = {...ruleTypes[activeManager]};
+            manageSettings.schema.meta.id = item.id;
+            manageSettings.schema.state.id = item.id;
+            manageSettings.schema.meta.cta = manageSettings.schema.update.cta;
+
+            return(
+                <ToggleArea key={item.id} title={`Name: ${state.memory[activeManager].items[item.id].name}`}>{
+                    <FormRegion 
+                        settings={manageSettings.schema} 
+                        initialState={state.memory[activeManager].items[item.id]} 
+                        setRegionData={updateMemory} 
+                        saveSection={saveRule}  
+                    />
+                }</ToggleArea>
+            );
+        });
+        return render;
+    };
+
+    const closeManager = ()=>{
+        setManagerActive(false);
+        setActiveManager("");
+    };
+
 
     //lifecycle
     useEffect(()=>{
@@ -196,21 +196,21 @@ export default function RuleEditor(props){
     return(
         <>  
             {/* Edit Item */}
-            {editorActive && (
-                <ToggleArea title={`Name: ${activeEditor.schema.meta.name ? activeEditor.schema.meta.name : activeEditor.schema.meta.name}`}>{
-                    <FormRegion 
-                        settings={activeEditor.schema} 
-                        initialState={state.memory[activeEditor.name] && state.memory[activeEditor.name].items && state.memory[activeEditor.name].items[activeEditor.schema.meta.id] ?  state.memory[activeEditor.name].items[activeEditor.schema.meta.id] : activeEditor.schema.state} 
-                        setRegionData={updateMemory} 
-                        saveSection={saveRule}  
-                    />
-                }</ToggleArea>
-            )}
+            {editorActive && renderEditor()}
 
             {/* Manage All Items */}
+            {managerActive && (
+                <section>
+                    <div className="flex items-center justify-between">
+                        <p>Manager</p>
+                        <button onClick={closeManager}>Close Manager</button>
+                    </div>
+                    {renderManager()}
+                </section>
+            )}
 
             {/* Render Cards */}
-            <section id="game-rules" className="flex items-center flex-wrap">{renderRuleCards}</section>
+            <section id="game-rules" className="flex items-center justify-around flex-wrap">{!editorActive && !managerActive && renderRuleCards}</section>
 
             <section>
                 <button onClick={()=>{console.log(state)}}>Log State</button>

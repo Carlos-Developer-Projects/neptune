@@ -9,10 +9,28 @@ export default function SideNav({navigation, secondaryNavigation, theme}){
     //render
     return(
         <>
-            <div className={`hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0 ${theme.sidebar.background}`}>
+            <style>
+                <style jsx global>{`
+                    .side-nav-bg{
+                        background-repeat:no-repeat;
+                        background-size:cover;
+                        background-position:center;
+                        position: absolute;
+                        height:40%;
+                        opacity:.5;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        z-index: 10;
+                        background-image:url('/img/backgrounds/side-nav-bg.png')
+                    }
+                `}</style>
+            </style>
+            <div className={`hidden relative lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0 ${theme.sidebar.background}`}>
+                
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className={`flex flex-col flex-grow ${theme.sidebar.background} pt-5 pb-4 overflow-y-auto`}>
-                {/* <div className="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto"> */}
+                <div className={`flex relative flex-col flex-grow ${theme.sidebar.background} pt-5 pb-4 overflow-y-auto`}>
+                    <div className="side-nav-bg"></div>
                     <div className="flex flex-col items-center flex-shrink-0 px-4">
                         <Logo alt="Neptune Logo"/>
                         <p className="text-white uppercase font-bold text-2xl tracking-wide">Neptune</p>

@@ -45,18 +45,7 @@ const masterCopy = {
 //page
 export default function(){
     //state
-    const[ruleCards, setRulesCards] = useState([
-        {
-            icon: GiCardDraw,
-            name: "Decks",
-            description: "Decks of cards are a major staple in most modern games.",
-            count: 0
-        }
-    ]);
     const[currentTab, setCurrentTab] = useState("Rules & Settings");
-    const[rules, setRules]= useState([]);
-    const[rulesSettings, setRulesSettings] = useState({});
-    const rulesRef = useRef();
     const[project, setProject] = useState({
         name: "",
         description: "",
@@ -64,8 +53,6 @@ export default function(){
         type: "tcg",
         url: "none"
     });
-
-    rulesRef.current = rulesSettings;
     //functions
 
     //Main project settings
@@ -165,151 +152,10 @@ export default function(){
         ]
     };
 
-    //Rules settings
-    const renderRuleCards = useMemo(()=>{
-
-        if(ruleCards.length === 0) return;
-
-        const render = ruleCards.map((card, index)=>{
-            return(<Rule key={index} icon={card.icon} name={card.name} count={card.count} description={card.description} />);
-        });
-        return render;
-
-    }, [ruleCards]);
-
-    const updateRule = (updateState)=>{
-        const updateRuleSettings = {...rulesRef.current};
-        updateRuleSettings[updateState.id] = updateState;
-        setRulesSettings(updateRuleSettings);
-    };
-    const saveRule = ()=>{
-        console.log(rulesRef.current);
-    };
-    const addRule = ()=>{
-        const ruleID = uuidv4();
-        //update rule state
-        const updateRuleSettings = {...rulesSettings};
-        updateRuleSettings[ruleID] = {
-            "name": "",
-            "id": ruleID,
-            "type": "please choose",
-            "target":"please choose",
-            "icon":"please choose"
-        };
-        setRulesSettings(updateRuleSettings);
-
-        //update rule fields
-        setTimeout(()=>{
-            const updateRules = [...rules];
-            updateRules.push({
-                    meta: {
-                        id: ruleID,
-                        name: "New Rule",
-                        intro: "Enter the settings for your game rule.",
-                        cta: "Save Rule"
-                    },
-                    controls: {
-                        regionData: updateRule,
-                        initialState: rulesRef.current[ruleID],
-                        saveSection: saveRule
-                    },
-                    fields: [
-                        {
-                            id: "name",
-                            label: "Name",
-                            type: "text",
-                            placholder: "Name your rule.",
-                            settings: {},
-                            message: "Name of the rule."
-                        },
-                        {
-                            id: "type",
-                            label: "Rule Type",
-                            type: "select",
-                            settings: {
-                                default: "please select"
-                            },
-                            options: [
-                                {
-                                    value: "number",
-                                    name: "Number"
-                                },
-                                {
-                                    value: "ability",
-                                    name: "Ability"
-                                }
-                            ]
-                        },
-                        {
-                            id: "target",
-                            label: "Rule Applies To",
-                            type: "select",
-                            settings: {
-                                default: "please select"
-                            },
-                            options: [
-                                {
-                                    value: "player",
-                                    name: "Rule Applies to Players"
-                                },
-                                {
-                                    value: "item",
-                                    name: "Rule Applies to Items, Creature, or any Non Player Element"
-                                },
-                                {
-                                    value: "global",
-                                    name: "Rule Applie to the entire game"
-                                }
-                            ]
-                        },
-                        {
-                            id: "icon",
-                            label: "Rule Icon",
-                            type: "file",
-                            settings: {},
-                            message: "Icon that represents your rule."
-                        }
-                    ]
-            });
-            setRules(updateRules);
-        }, 50);
-       
-    };
-    const renderRules = (allRules)=>{
-        const render = allRules.map((rule)=>{
-            return(<ToggleArea title={
-                `Name: ${rulesSettings[rule.meta.id].name ? rulesSettings[rule.meta.id].name : rule.meta.name} ${rulesSettings[rule.meta.id].type ? `  -- Type: ${rulesSettings[rule.meta.id].type}` : ''}`} 
-                key={rule.meta.id}>{
-                <FormRegion 
-                    key={rule.meta.id} 
-                    settings={rule} 
-                    initialState={rulesSettings[rule.meta.id]} 
-                    setRegionData={rule.controls.regionData} 
-                    saveSection={rule.controls.saveSection}  
-                />
-            }</ToggleArea>);
-        });
-        return render;
-    };
-
-    const manageRules = ()=>{
-
-    };
-
-    const ruleCreators = [
-        {
-            icon: "",
-            name: "",
-            description: "",
-            create: addRule,
-            manage: manageRules,
-            count: 0
-        }
-    ];
-   
     //lifecycle
     useEffect(()=>{
-    },[rulesSettings]);
+
+    },[]);
 
     //render
     return(
@@ -349,7 +195,6 @@ export default function(){
                                     <Button text="Board Regions" handleClick={()=>{}} custom="ml-3 bg-button" />
                                 </section> */}
 
-                                {rules.length > 0 && renderRules(rules)}
                             </TransitionArea>
                         </>
                     )}
