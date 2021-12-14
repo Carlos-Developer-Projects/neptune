@@ -56,21 +56,21 @@ export const dummy_projects = [
 ];
 
 export const ruleTypes = {
-    decks: {
-        name: "decks",
+    counters: {
+        name: "counters",
         schema: {
             meta: {
                 id: "",
                 name: "New Deck",
                 intro: "Enter the settings for your deck.",
                 cta: "Save Deck",
-                type: "decks"
+                type: "counters"
             },
             update:{
                 cta: "Update Deck"
             },
             state: {
-                type:"decks",
+                type:"counters",
                 name: "",
                 icon: "",
             },
@@ -95,21 +95,21 @@ export const ruleTypes = {
             ]
         }
     },
-    hands: {
-        name: "hands",
+    abilities: {
+        name: "abilities",
         schema: {
             meta: {
                 id: "",
                 name: "New Hand",
                 intro: "Enter the settings for your card hand.",
                 cta: "Save Hand",
-                type: "hands"
+                type: "abilities"
             },
             update:{
                 cta: "Update Hand"
             },
             state: {
-                type:"hands",
+                type:"abilities",
                 name: "",
                 icon: "",
             },
@@ -135,22 +135,22 @@ export const ruleTypes = {
         }
     },
     cards:{
-        decks: {
+        counters: {
             icon: GiCardDraw,
-            type: "decks",
-            name: "Decks",
-            description: "Decks are a major staple in most modern games.",
+            type: "counters",
+            name: "Counters",
+            description: "Counters are used to keep track of score and other data in your game.",
             count: 0,
             design: {
                 image: "/img/backgrounds/sand-army.jpg",
                 opacity: .4
             }
         },
-        hands: {
+        abilities: {
             icon: GiCardPlay,
-            type: "hands",
-            name: "Card Hands",
-            description: "Players can draw and use cards from your decks.",
+            type: "abilities",
+            name: "Abilities",
+            description: "Abilities and properties your items can have such as attacks or powers.",
             count: 0,
             design: {
                 image: "/img/backgrounds/blind-hand.jpg",
@@ -161,18 +161,7 @@ export const ruleTypes = {
             icon: GiArrowsShield,
             type: "actions",
             name: "Actions",
-            description: "Actions are options your players can use.",
-            count: 0,
-            design: {
-                image: "/img/backgrounds/explore.jpg",
-                opacity: .6
-            }
-        },
-        blast: {
-            icon: GiArrowsShield,
-            type: "blast",
-            name: "Blast",
-            description: "Actions are options your players can use.",
+            description: "Actions your players or items can use during the game.",
             count: 0,
             design: {
                 image: "/img/backgrounds/explore.jpg",

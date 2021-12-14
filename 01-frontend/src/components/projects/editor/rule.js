@@ -27,6 +27,16 @@ export default function RuleCard(props){
                 .game-rule-body{
                     z-index: 20;
                 }
+                @media screen and (max-width:1350px){
+                    .game-rule{
+                        width: 48%;
+                    }
+                }
+                @media screen and (max-width:760px){
+                    .game-rule{
+                        width: 100%;
+                    }
+                }
             `}</style>
             <div className="game-rule bg-black relative w-4/12 text-white text-center mt-3 mb-3 border-2 border-red-800 rounded-md p-4 shadow-black shadow-lg">
                 <div className="game-rule-bg" style={{"backgroundImage":`url(${props.design.image})`, "opacity":`${props.design.opacity}`}}></div>

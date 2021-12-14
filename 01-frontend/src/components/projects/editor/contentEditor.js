@@ -258,7 +258,7 @@ export default function ContentEditor(props){
             )}
 
             {/* Render Cards */}
-            {!editorActive && !managerActive && (<section id="game-rules" className="flex items-center justify-around flex-wrap">{renderRuleCards}</section>)}
+            {!editorActive && !managerActive && (<section id="game-rules" className="flex items-center justify-between flex-wrap">{renderRuleCards}</section>)}
             
         </>
     )
