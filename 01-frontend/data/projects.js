@@ -1,4 +1,5 @@
-import {GiCardDraw, GiCardPlay, GiArrowsShield} from 'react-icons/gi';
+import {GiCardDraw, GiCardPlay, GiArrowsShield, GiAbstract031} from 'react-icons/gi';
+import {MdOutlineGames, } from 'react-icons/md';
 
 export const dummy_projects = [
     {
@@ -180,3 +181,14 @@ export const ruleTypes = {
         }
     }
 };
+
+export const tabsData = [
+    { 
+        name: 'Project Info',
+        icon: MdOutlineGames
+    },
+    { 
+        name: 'Rules & Settings',
+        icon: GiAbstract031
+    }
+];

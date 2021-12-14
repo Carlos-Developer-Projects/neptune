@@ -1,7 +1,13 @@
 //dependencies
 import { useEffect, useState } from "react";
+//components
+import Button from "../elements/button";
+import ButtonProps from "../elements/buttonProps";
+import { FiChevronRight } from 'react-icons/fi';
+import { BsTrashFill } from 'react-icons/bs';
+
 //component
-export default function Section({name, intro, children, cta, handleClick, currentState}){
+export default function Section({name, intro, children, cta, handleClick, currentState, handleCancel, dataid}){
     //state
     const[previewImages, setPreviewImages] = useState([]);
 
@@ -51,12 +57,8 @@ export default function Section({name, intro, children, cta, handleClick, curren
                         <div className="px-4 py-5 bg-white space-y-6 sm:p-6">{children}</div>
                     </div>
                     <div className="mt-3 px-4 sm:px-0 py-3 bg-gray-50 text-right">
-                        <button
-                            type="submit"
-                            onClick={handleClick}
-                            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-button focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >{cta}
-                        </button>
+                        {handleCancel && <ButtonProps id={dataid} handleClick={handleCancel} text="Delete" custom="bg-main-dark mr-3" icon={BsTrashFill} />}
+                        <Button handleClick={handleClick} text={cta} custom="bg-button" icon={FiChevronRight} />
                     </div>
                 </div>
             </div>

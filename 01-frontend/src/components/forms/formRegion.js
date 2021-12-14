@@ -3,7 +3,7 @@ import { useReducer, useEffect } from "react";
 //components
 import Forms from "./index";
 //component
-export default function FormRegion({settings, setRegionData, saveSection, initialState}){
+export default function FormRegion({settings, setRegionData, saveSection, initialState, handleCancel}){
     //state
     const [state, dispatch] = useReducer(reducer, initialState);
     
@@ -105,6 +105,8 @@ export default function FormRegion({settings, setRegionData, saveSection, initia
                 cta={settings.meta.cta}
                 handleClick={saveSection} 
                 currentState={state}
+                handleCancel={handleCancel ? handleCancel : null}
+                dataid={state.id ? state.id : "none"}
             >
                 {renderFieldGroups(settings.fields)}
             </Forms.Section>

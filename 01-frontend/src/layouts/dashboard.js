@@ -120,7 +120,7 @@ export default function Dashboard({children}){
                     {/* Dashboard Header */}
                     <Header setSidebarOpen={setSidebarOpen} />
                     {/* Main Content */}
-                    <main className="flex-1 pb-8">{children}</main>
+                    <main className="flex-1 pb-8 relative">{children}</main>
                 </div>
             </div>
         </>

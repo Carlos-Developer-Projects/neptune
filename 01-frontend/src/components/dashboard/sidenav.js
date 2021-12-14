@@ -22,7 +22,6 @@ export default function SideNav({navigation, secondaryNavigation, theme}){
                         right: 0;
                         bottom: 0;
                         z-index: 10;
-                        background-image:url('/img/backgrounds/side-nav-bg.png')
                     }
                 `}</style>
             </style>

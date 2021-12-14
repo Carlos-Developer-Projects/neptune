@@ -1,25 +1,19 @@
 //depedencies
 import { useEffect, useState, useRef, useMemo } from "react";
-import { v4 as uuidv4 } from 'uuid';
 //layout
 import Dashboard from "../../src/layouts/dashboard";
 import Meta from "../../src/components/global/meta";
 import PageHeader from "../../src/components/dashboard/pageHeader";
-import SectionHeader from "../../src/components/dashboard/SectionHeader";
 import FormRegion from "../../src/components/forms/formRegion";
 import TabRegions from "../../src/components/dashboard/tabRegions";
 import ToggleArea from "../../src/components/dashboard/toggleArea";
-import Button from "../../src/components/elements/button";
 import TransitionArea from "../../src/components/dashboard/transtionArea";
-import Rule from "../../src/components/projects/editor/rule";
-
-import RuleEditor from "../../src/components/projects/editor/ruleEditor";
-
-//icons
-import {GiCardDraw} from 'react-icons/gi';
+import ContentEditor from "../../src/components/projects/editor/contentEditor";
 //components
 //data
 import { theme } from "../../data/theme";
+import { tabsData } from "../../data/projects";
+
 const crumbs = [
     {
       "text": "Home",
@@ -30,13 +24,7 @@ const crumbs = [
         "link": "/projects"
     }
 ];
-const tabsData = [
-    { name: 'Project Data'},
-    { name: 'Rules & Settings'},
-    { name: 'Editions'},
-    { name: 'Design'},
-    { name: 'Marketing'}
-];
+
 const masterCopy = {
     rules:{
         intro:"Rules are the way your item NFT interaction which each other. Each NFT is connected to all others in the game and can send their status and data to each player."
@@ -154,7 +142,7 @@ export default function(){
 
     //lifecycle
     useEffect(()=>{
-
+        console.log(tabsData);
     },[]);
 
     //render
@@ -162,44 +150,68 @@ export default function(){
         <>
             <Meta title="New Project" />
             <Dashboard>
-                <PageHeader theme={theme} title={!project.name ? "New Project" : project.name} crumbs={crumbs} />
-                <div className="mt-6 px-4 pb-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
-                    {/* Tab Menu */}
-                    <TabRegions tabs={tabsData} currentTab={currentTab} setTabs={setCurrentTab} />
+                <style jsx>{`
+                    .page-bg{
+                        margin-bottom:-2rem;
+                        display:block;
+                        opacity: .25;
+                        background-repeat:no-repeat;
+                        background-size:cover;
+                        background-position: 100% -20%;
+                        width:100%;
+                        height:400px;
+                        background-image:url('/img/backgrounds/market-opt.png');
+                    }
+                    .page-content{
+                        min-height: 900px;
+                    }
+                `}</style>
+                
+                <section className="page-content">
+                    <PageHeader theme={theme} title={!project.name ? "New Project" : project.name} crumbs={crumbs} />
+                    <div className="relative mt-6 px-4 pb-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
 
-                    {currentTab === "Project Data" && (
-                        <TransitionArea comparison={currentTab} name="Project Data">
-                            <ToggleArea title="Project Main Details">{renderFromSections(projectFormsData.sections)}</ToggleArea>
-                        </TransitionArea>
-                    )}
+                        {/* Tab Menu */}
+                        <TabRegions tabs={tabsData} currentTab={currentTab} setTabs={setCurrentTab} />
 
-                    {currentTab === "Rules & Settings" && (
-                        <>
-                            <TransitionArea comparison={currentTab} name="Rules & Settings">
-                                <div className="flex items-start justify-between">
-                                    <p className="mb-4 max-w-4xl">{masterCopy.rules.intro}</p>
-                                </div>
-
-                                <RuleEditor state={{
-                                    memory: {}
-                                }} />
-
-                                {/* <section id="settings-type" className="mt-3 mb-3 flex items-center justify-start">
-                                    <Button text="Rule" handleClick={addRule} custom="bg-button" />
-                                    <Button text="Player Actions" handleClick={()=>{}} custom="ml-3 bg-button" />
-                                    <Button text="Card Deck" handleClick={()=>{}} custom="ml-3 bg-button" />
-                                    <Button text="Card Hand" handleClick={()=>{}} custom="ml-3 bg-button" />
-                                    <Button text="Conditions" handleClick={()=>{}} custom="ml-3 bg-button" />
-                                    <Button text="Element Types" handleClick={()=>{}} custom="ml-3 bg-button" />
-                                    <Button text="Turn Phases" handleClick={()=>{}} custom="ml-3 bg-button" />
-                                    <Button text="Board Regions" handleClick={()=>{}} custom="ml-3 bg-button" />
-                                </section> */}
-
+                        {/* Project Info */}
+                        {currentTab === "Project Info" && (
+                            <TransitionArea comparison={currentTab} name="Project Info">
+                                <ToggleArea title="Project Main Details">{renderFromSections(projectFormsData.sections)}</ToggleArea>
                             </TransitionArea>
-                        </>
-                    )}
-                    
-                </div>
+                        )}
+
+                        {/* Rules Editor */}
+                        {currentTab === "Rules & Settings" && (
+                            <>
+                                <TransitionArea comparison={currentTab} name="Rules & Settings">
+                                    <div className="flex items-start justify-between">
+                                        <p className="mb-4 max-w-4xl">{masterCopy.rules.intro}</p>
+                                    </div>
+
+                                    <ContentEditor state={{
+                                        memory: {}
+                                    }} />
+
+                                    {/* <section id="settings-type" className="mt-3 mb-3 flex items-center justify-start">
+                                        <Button text="Rule" handleClick={addRule} custom="bg-button" />
+                                        <Button text="Player Actions" handleClick={()=>{}} custom="ml-3 bg-button" />
+                                        <Button text="Card Deck" handleClick={()=>{}} custom="ml-3 bg-button" />
+                                        <Button text="Card Hand" handleClick={()=>{}} custom="ml-3 bg-button" />
+                                        <Button text="Conditions" handleClick={()=>{}} custom="ml-3 bg-button" />
+                                        <Button text="Element Types" handleClick={()=>{}} custom="ml-3 bg-button" />
+                                        <Button text="Turn Phases" handleClick={()=>{}} custom="ml-3 bg-button" />
+                                        <Button text="Board Regions" handleClick={()=>{}} custom="ml-3 bg-button" />
+                                    </section> */}
+
+                                </TransitionArea>
+                            </>
+                        )}
+                        
+                    </div>
+                </section>
+                
+                <div className="page-bg"></div>
             </Dashboard>
         </>
     )

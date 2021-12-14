@@ -21,6 +21,9 @@ export default function RuleCard(props){
                     bottom: 0;
                     z-index: 10;
                 }
+                .game-rule:hover{
+                    border: 2px solid green;
+                }
                 .game-rule-body{
                     z-index: 20;
                 }

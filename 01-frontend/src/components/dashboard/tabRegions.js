@@ -37,7 +37,7 @@ export default function TabRegions({tabs, currentTab, setTabs}) {
                   )}
                   aria-current={currentTab}
                 >
-                  {tab.name}
+                  {tab.icon && <tab.icon className="inline-block text-4xl mr-2" />} {tab.name}
                 </button>
               ))}
             </nav>
