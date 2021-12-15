@@ -75,7 +75,7 @@ module.exports.get = async (event, context, callback) => {
         }
 
         //query dynamodb
-        const db = await Dynamo.db_get(params.id);
+        const db = await Dynamo.db_get(params.id, params);
 
         //send back to dashboard
         const response = {
@@ -132,7 +132,7 @@ module.exports.query = async (event, context, callback) => {
             'Access-Control-Allow-Credentials': true,
             },
             body: JSON.stringify({
-                message: `Get Data`,
+                message: `Search Data`,
                 content: db
             })
         };
@@ -156,4 +156,47 @@ module.exports.query = async (event, context, callback) => {
 }
 
 //delete
-module.exports.delete = async (event, context, callback) => {}
+module.exports.delete = async (event, context, callback) => {
+    //parse the body query params
+    const params = JSON.parse(JSON.stringify(event.queryStringParameters));
+
+    try{
+
+        if(!params.id){
+            console.log("No ID passed in");
+            throw Error("No ID passed in");
+        }
+
+        //query dynamodb
+        const db = await Dynamo.db_delete(params.id, params);
+
+        //send back to dashboard
+        const response = {
+            statusCode: 200,
+            headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': true,
+            },
+            body: JSON.stringify({
+                message: `Delete Data`,
+                content: db
+            })
+        };
+        return response;
+
+    }catch(e){
+        //send back to dashboard
+        const response = {
+            statusCode: 200,
+            headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': true,
+            },
+            body: JSON.stringify({
+                message: `Error Getting Data`,
+                content: e
+            })
+        };
+        return response;
+    }
+}

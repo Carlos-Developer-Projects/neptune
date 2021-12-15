@@ -12,7 +12,8 @@
       "lambdaHashingVersion": "20201221",
       "deploymentBucket": "serverless.projects.carlos-developer",
       "environment": {
-        "tableNameProjects": "projects-dev"
+        "tableNameProjects": "projects-dev",
+        "tableNameItems": "items-dev"
       },
       "iamRoleStatements": [
         {
@@ -140,7 +141,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless.projects.carlos-developer",
-                "S3Key": "serverless/neptune-queries-dashboard/dev/1639605111402-2021-12-15T21:51:51.402Z/neptune-queries-dashboard.zip"
+                "S3Key": "serverless/neptune-queries-dashboard/dev/1639606710623-2021-12-15T22:18:30.623Z/neptune-queries-dashboard.zip"
               },
               "Handler": "functions/projects.save",
               "Runtime": "nodejs12.x",
@@ -149,7 +150,8 @@
               "Timeout": 30,
               "Environment": {
                 "Variables": {
-                  "tableNameProjects": "projects-dev"
+                  "tableNameProjects": "projects-dev",
+                  "tableNameItems": "items-dev"
                 }
               },
               "Role": {
@@ -168,7 +170,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless.projects.carlos-developer",
-                "S3Key": "serverless/neptune-queries-dashboard/dev/1639605111402-2021-12-15T21:51:51.402Z/neptune-queries-dashboard.zip"
+                "S3Key": "serverless/neptune-queries-dashboard/dev/1639606710623-2021-12-15T22:18:30.623Z/neptune-queries-dashboard.zip"
               },
               "Handler": "functions/projects.get",
               "Runtime": "nodejs12.x",
@@ -177,7 +179,8 @@
               "Timeout": 120,
               "Environment": {
                 "Variables": {
-                  "tableNameProjects": "projects-dev"
+                  "tableNameProjects": "projects-dev",
+                  "tableNameItems": "items-dev"
                 }
               },
               "Role": {
@@ -196,7 +199,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless.projects.carlos-developer",
-                "S3Key": "serverless/neptune-queries-dashboard/dev/1639605111402-2021-12-15T21:51:51.402Z/neptune-queries-dashboard.zip"
+                "S3Key": "serverless/neptune-queries-dashboard/dev/1639606710623-2021-12-15T22:18:30.623Z/neptune-queries-dashboard.zip"
               },
               "Handler": "functions/projects.query",
               "Runtime": "nodejs12.x",
@@ -205,7 +208,8 @@
               "Timeout": 120,
               "Environment": {
                 "Variables": {
-                  "tableNameProjects": "projects-dev"
+                  "tableNameProjects": "projects-dev",
+                  "tableNameItems": "items-dev"
                 }
               },
               "Role": {
@@ -224,7 +228,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless.projects.carlos-developer",
-                "S3Key": "serverless/neptune-queries-dashboard/dev/1639605111402-2021-12-15T21:51:51.402Z/neptune-queries-dashboard.zip"
+                "S3Key": "serverless/neptune-queries-dashboard/dev/1639606710623-2021-12-15T22:18:30.623Z/neptune-queries-dashboard.zip"
               },
               "Handler": "functions/projects.delete",
               "Runtime": "nodejs12.x",
@@ -233,7 +237,8 @@
               "Timeout": 30,
               "Environment": {
                 "Variables": {
-                  "tableNameProjects": "projects-dev"
+                  "tableNameProjects": "projects-dev",
+                  "tableNameItems": "items-dev"
                 }
               },
               "Role": {
@@ -247,44 +252,44 @@
               "DeletedataUnderscorefunctionLogGroup"
             ]
           },
-          "SavedataUnderscorefunctionLambdaVersionPUgkjTWn3dwRNEFGzPQ9SalZAOMNLopHl7ryMXnHlIQ": {
+          "SavedataUnderscorefunctionLambdaVersionkDBEOj3P2tl04PnYC6xy2qmVLQLLl2uB0MOSIkbxgk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SavedataUnderscorefunctionLambdaFunction"
               },
-              "CodeSha256": "wTVkKdeT8KBMOTpwKH6X3hQrY1SRvdBw3mP65JxUZsU="
+              "CodeSha256": "I6nlJvw+H+eT0fdgxtKmuwAhDiTfsHlzoQ9MHsBKM5o="
             }
           },
-          "GetdataUnderscorefunctionLambdaVersionYlV3NSQeiufstCYPjijBuYtCruaLkPaSt5IPmK3G4": {
+          "GetdataUnderscorefunctionLambdaVersionuRoaxA9RNe0Jmo840V2xK6P7aVb2NBG6j7c5wADf8u8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetdataUnderscorefunctionLambdaFunction"
               },
-              "CodeSha256": "wTVkKdeT8KBMOTpwKH6X3hQrY1SRvdBw3mP65JxUZsU="
+              "CodeSha256": "I6nlJvw+H+eT0fdgxtKmuwAhDiTfsHlzoQ9MHsBKM5o="
             }
           },
-          "QuerydataUnderscorefunctionLambdaVersionGax5YpRW94anrg0O7DldCbJwlvgwfKGE7Ma5ybiNfQ": {
+          "QuerydataUnderscorefunctionLambdaVersionOyT8fuvZOAsfokCQG3tOtujX6M3hnwGuJ4LBP82Sag": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "QuerydataUnderscorefunctionLambdaFunction"
               },
-              "CodeSha256": "wTVkKdeT8KBMOTpwKH6X3hQrY1SRvdBw3mP65JxUZsU="
+              "CodeSha256": "I6nlJvw+H+eT0fdgxtKmuwAhDiTfsHlzoQ9MHsBKM5o="
             }
           },
-          "DeletedataUnderscorefunctionLambdaVersion47rrDYHE8RQZk2fyaalSdEOuJthvAFIocyvV5gnWlM": {
+          "DeletedataUnderscorefunctionLambdaVersionEPtyhwcw6UzgrDBbdLge4fgM76NInsYvyvZRLqLWE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DeletedataUnderscorefunctionLambdaFunction"
               },
-              "CodeSha256": "wTVkKdeT8KBMOTpwKH6X3hQrY1SRvdBw3mP65JxUZsU="
+              "CodeSha256": "I6nlJvw+H+eT0fdgxtKmuwAhDiTfsHlzoQ9MHsBKM5o="
             }
           },
           "ApiGatewayRestApi": {
@@ -723,7 +728,7 @@
               "DeletedataUnderscorefunctionLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1639605106941": {
+          "ApiGatewayDeployment1639606706216": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -901,7 +906,7 @@
           "SavedataUnderscorefunctionLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SavedataUnderscorefunctionLambdaVersionPUgkjTWn3dwRNEFGzPQ9SalZAOMNLopHl7ryMXnHlIQ"
+              "Ref": "SavedataUnderscorefunctionLambdaVersionkDBEOj3P2tl04PnYC6xy2qmVLQLLl2uB0MOSIkbxgk"
             },
             "Export": {
               "Name": "sls-neptune-queries-dashboard-dev-SavedataUnderscorefunctionLambdaFunctionQualifiedArn"
@@ -910,7 +915,7 @@
           "GetdataUnderscorefunctionLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetdataUnderscorefunctionLambdaVersionYlV3NSQeiufstCYPjijBuYtCruaLkPaSt5IPmK3G4"
+              "Ref": "GetdataUnderscorefunctionLambdaVersionuRoaxA9RNe0Jmo840V2xK6P7aVb2NBG6j7c5wADf8u8"
             },
             "Export": {
               "Name": "sls-neptune-queries-dashboard-dev-GetdataUnderscorefunctionLambdaFunctionQualifiedArn"
@@ -919,7 +924,7 @@
           "QuerydataUnderscorefunctionLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "QuerydataUnderscorefunctionLambdaVersionGax5YpRW94anrg0O7DldCbJwlvgwfKGE7Ma5ybiNfQ"
+              "Ref": "QuerydataUnderscorefunctionLambdaVersionOyT8fuvZOAsfokCQG3tOtujX6M3hnwGuJ4LBP82Sag"
             },
             "Export": {
               "Name": "sls-neptune-queries-dashboard-dev-QuerydataUnderscorefunctionLambdaFunctionQualifiedArn"
@@ -928,7 +933,7 @@
           "DeletedataUnderscorefunctionLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeletedataUnderscorefunctionLambdaVersion47rrDYHE8RQZk2fyaalSdEOuJthvAFIocyvV5gnWlM"
+              "Ref": "DeletedataUnderscorefunctionLambdaVersionEPtyhwcw6UzgrDBbdLge4fgM76NInsYvyvZRLqLWE"
             },
             "Export": {
               "Name": "sls-neptune-queries-dashboard-dev-DeletedataUnderscorefunctionLambdaFunctionQualifiedArn"
@@ -965,7 +970,8 @@
       "vpc": {}
     },
     "custom": {
-      "tableNameProjects": "projects-dev"
+      "tableNameProjects": "projects-dev",
+      "tableNameItems": "items-dev"
     },
     "pluginsData": {},
     "functions": {
@@ -1003,7 +1009,7 @@
         "memory": 1024,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "SavedataUnderscorefunctionLambdaVersionPUgkjTWn3dwRNEFGzPQ9SalZAOMNLopHl7ryMXnHlIQ"
+        "versionLogicalId": "SavedataUnderscorefunctionLambdaVersionkDBEOj3P2tl04PnYC6xy2qmVLQLLl2uB0MOSIkbxgk"
       },
       "getdata_function": {
         "handler": "functions/projects.get",
@@ -1039,7 +1045,7 @@
         "memory": 1024,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetdataUnderscorefunctionLambdaVersionYlV3NSQeiufstCYPjijBuYtCruaLkPaSt5IPmK3G4"
+        "versionLogicalId": "GetdataUnderscorefunctionLambdaVersionuRoaxA9RNe0Jmo840V2xK6P7aVb2NBG6j7c5wADf8u8"
       },
       "querydata_function": {
         "handler": "functions/projects.query",
@@ -1075,7 +1081,7 @@
         "memory": 1024,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "QuerydataUnderscorefunctionLambdaVersionGax5YpRW94anrg0O7DldCbJwlvgwfKGE7Ma5ybiNfQ"
+        "versionLogicalId": "QuerydataUnderscorefunctionLambdaVersionOyT8fuvZOAsfokCQG3tOtujX6M3hnwGuJ4LBP82Sag"
       },
       "deletedata_function": {
         "handler": "functions/projects.delete",
@@ -1111,7 +1117,7 @@
         "memory": 1024,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "DeletedataUnderscorefunctionLambdaVersion47rrDYHE8RQZk2fyaalSdEOuJthvAFIocyvV5gnWlM"
+        "versionLogicalId": "DeletedataUnderscorefunctionLambdaVersionEPtyhwcw6UzgrDBbdLge4fgM76NInsYvyvZRLqLWE"
       }
     },
     "configValidationMode": "warn",
@@ -1136,7 +1142,7 @@
     "artifact": "/workspace/neptune/02-serverless/queries/.serverless/neptune-queries-dashboard.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/neptune-queries-dashboard/dev/1639605111402-2021-12-15T21:51:51.402Z",
+    "artifactDirectoryName": "serverless/neptune-queries-dashboard/dev/1639606710623-2021-12-15T22:18:30.623Z",
     "artifact": "neptune-queries-dashboard.zip"
   }
 }

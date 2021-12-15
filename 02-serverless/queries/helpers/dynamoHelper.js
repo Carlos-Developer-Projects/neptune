@@ -3,6 +3,10 @@
 const AWS = require("aws-sdk");
 const docClient = new AWS.DynamoDB.DocumentClient();
 const tableName = process.env.tableNameProjects;
+const allTables = {
+    projects: process.env.tableNameProjects,
+    items: process.env.tableNameItems
+};
 
 //save
 const db_put = async(body) => {
@@ -11,6 +15,10 @@ const db_put = async(body) => {
         TableName: tableName,
         Item: body
     };
+
+    if(body.table){
+        params.TableName = allTables[body.table];
+    }
 
     const res = await docClient.put(params).promise();
     
@@ -22,7 +30,7 @@ const db_put = async(body) => {
 }
 
 //get
-const db_get = async(id) => {
+const db_get = async(id, query) => {
 
     const params = {
         TableName : tableName,
@@ -30,6 +38,10 @@ const db_get = async(id) => {
           id: id
         }
     };
+
+    if(query.table){
+        params.TableName = allTables[query.table];
+    }
 
     const res = await docClient.get(params).promise();
 
@@ -65,6 +77,10 @@ const db_query = async(user, query) => {
         };
     }
 
+    if(query.table){
+        params.TableName = allTables[query.table];
+    }
+
     try{
         const res = await docClient.query(params).promise();
 
@@ -84,7 +100,28 @@ const db_query = async(user, query) => {
 }
 
 //delete
-const db_delete = async(id)=>{}
+const db_delete = async(id, query)=>{
+
+    const params = {
+        TableName : tableName,
+        Key: {
+          id: id
+        }
+    };
+
+    if(query.table){
+        params.TableName = allTables[query.table];
+    }
+
+    const res = await docClient.delete(params).promise();
+
+    if (!res) {
+        throw Error("There was an error getting the data.");
+    }
+
+    return res;
+
+}
 
 //exports
 module.exports.db_get = db_get;

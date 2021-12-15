@@ -35,4 +35,24 @@ resources:
                 KeyType: HASH
             Projection:
               ProjectionType: 'ALL'
+        BillingMode: PAY_PER_REQUEST    
+    ItemsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableNameProjects}
+        AttributeDefinitions:
+          - AttributeName: user
+            AttributeType: S
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: UserIndex
+            KeySchema:
+              - AttributeName: user
+                KeyType: HASH
+            Projection:
+              ProjectionType: 'ALL'
         BillingMode: PAY_PER_REQUEST

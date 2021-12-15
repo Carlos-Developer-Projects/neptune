@@ -12,6 +12,7 @@ provider:
 
   environment:
     tableNameProjects: ${self:custom.tableNameProjects}
+    tableNameItems: ${self:custom.tableNameItems}
 
   iamRoleStatements:
 
@@ -22,6 +23,7 @@ provider:
 
 custom:
   tableNameProjects: projects-${sls:stage}
+  tableNameItems: items-${sls:stage}
 
 functions:
   savedata_function:

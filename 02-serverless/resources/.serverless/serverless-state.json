@@ -11,56 +11,6 @@
       "runtime": "nodejs12.x",
       "lambdaHashingVersion": "20201221",
       "deploymentBucket": "serverless.projects.carlos-developer",
-      "environment": {
-        "tableNameProjects": "projects-dev",
-        "tableNameItems": "items-dev"
-      },
-      "iamRoleStatements": [
-        {
-          "Effect": "Allow",
-          "Action": [
-            "dynamodb:*"
-          ],
-          "Resource": [
-            {
-              "Fn::GetAtt": [
-                "ProjectsTable",
-                "Arn"
-              ]
-            },
-            {
-              "Fn::Join": [
-                "/",
-                [
-                  {
-                    "Fn::GetAtt": [
-                      "ProjectsTable",
-                      "Arn"
-                    ]
-                  },
-                  "index",
-                  "UserIndex"
-                ]
-              ]
-            }
-          ]
-        },
-        {
-          "Effect": "Allow",
-          "Action": [
-            "s3:*"
-          ],
-          "Resource": {
-            "Fn::Join": [
-              "",
-              [
-                "arn:aws:s3:::serverless.projects.carlos-developer",
-                "/*"
-              ]
-            ]
-          }
-        }
-      ],
       "versionFunctions": true,
       "deploymentBucketObject": {
         "name": "serverless.projects.carlos-developer"
@@ -70,6 +20,43 @@
         "Description": "The AWS CloudFormation template for this Serverless application",
         "Resources": {
           "ProjectsTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "projects-dev",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "user",
+                  "AttributeType": "S"
+                },
+                {
+                  "AttributeName": "id",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "id",
+                  "KeyType": "HASH"
+                }
+              ],
+              "GlobalSecondaryIndexes": [
+                {
+                  "IndexName": "UserIndex",
+                  "KeySchema": [
+                    {
+                      "AttributeName": "user",
+                      "KeyType": "HASH"
+                    }
+                  ],
+                  "Projection": {
+                    "ProjectionType": "ALL"
+                  }
+                }
+              ],
+              "BillingMode": "PAY_PER_REQUEST"
+            }
+          },
+          "ItemsTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
               "TableName": "projects-dev",
@@ -161,6 +148,43 @@
             ],
             "BillingMode": "PAY_PER_REQUEST"
           }
+        },
+        "ItemsTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "projects-dev",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "user",
+                "AttributeType": "S"
+              },
+              {
+                "AttributeName": "id",
+                "AttributeType": "S"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "id",
+                "KeyType": "HASH"
+              }
+            ],
+            "GlobalSecondaryIndexes": [
+              {
+                "IndexName": "UserIndex",
+                "KeySchema": [
+                  {
+                    "AttributeName": "user",
+                    "KeyType": "HASH"
+                  }
+                ],
+                "Projection": {
+                  "ProjectionType": "ALL"
+                }
+              }
+            ],
+            "BillingMode": "PAY_PER_REQUEST"
+          }
         }
       },
       "Outputs": {}
@@ -186,7 +210,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/neptune-resources/dev/1639591679340-2021-12-15T18:07:59.340Z",
+    "artifactDirectoryName": "serverless/neptune-resources/dev/1639606507959-2021-12-15T22:15:07.959Z",
     "artifact": ""
   }
 }
