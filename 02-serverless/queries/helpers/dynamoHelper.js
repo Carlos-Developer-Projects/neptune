@@ -41,7 +41,7 @@ const db_get = async(id) => {
 }
 
 //query
-const db_query = async(user) => {
+const db_query = async(user, query) => {
     const params = {
         TableName : tableName,
         IndexName: "UserIndex",
@@ -54,7 +54,16 @@ const db_query = async(user) => {
         }
     };
 
-    console.log(params);
+    if(query.limit){
+        params.Limit = query.limit;
+    }
+
+    if(query.id){
+        params.ExclusiveStartKey = {
+            id: query.id,
+            user: user
+        };
+    }
 
     try{
         const res = await docClient.query(params).promise();

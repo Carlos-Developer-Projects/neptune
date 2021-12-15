@@ -122,7 +122,7 @@ module.exports.query = async (event, context, callback) => {
         }
 
         //query dynamodb
-        const db = await Dynamo.db_query(params.user);
+        const db = await Dynamo.db_query(params.user, params);
 
         //send back to dashboard
         const response = {
