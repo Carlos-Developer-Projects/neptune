@@ -1,0 +1,59 @@
+service: neptune-resources
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  stage: dev
+  region: us-east-1
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  deploymentBucket: 
+    name: serverless.projects.carlos-developer
+    
+  # Making an environment variable that will be available to all the functions in this service
+  environment:
+    tableNameProjects: ${self:custom.tableNameProjects}
+    tableNameItems: ${self:custom.tableNameItems}
+
+  # AWS Permissions with roles
+  # This role for example allows this lambda to have all permissions on bucket tvents
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "dynamodb:*"
+      Resource:
+        - { "Fn::GetAtt": ["ProjectsTable", "Arn" ] }
+        - { "Fn::Join": [ "/", [ 
+            { "Fn::GetAtt": ["ProjectsTable", "Arn" ] }, "index", "UserIndex" 
+          ]]}
+    - Effect: "Allow"
+      Action:
+        - "s3:*"
+      Resource: { "Fn::Join": ["", ["arn:aws:s3:::serverless.projects.carlos-developer", "/*" ] ] }
+
+custom:
+  tableNameProjects: projects-${sls:stage}
+  tableNameItems: items-${sls:stage}
+    
+resources:
+  Resources:
+    ProjectsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableNameProjects}
+        AttributeDefinitions:
+          - AttributeName: user
+            AttributeType: S
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: UserIndex
+            KeySchema:
+              - AttributeName: user
+                KeyType: HASH
+            Projection:
+              ProjectionType: 'ALL'
+        BillingMode: PAY_PER_REQUEST
