@@ -1,7 +1,9 @@
 //depedencies
 import { useEffect, useState, useRef, useMemo } from "react";
+import { useMoralis, useNewMoralisObject, useMoralisQuery } from "react-moralis";
 //layout
 import Dashboard from "../../src/layouts/dashboard";
+//components
 import Meta from "../../src/components/global/meta";
 import PageHeader from "../../src/components/dashboard/pageHeader";
 import FormRegion from "../../src/components/forms/formRegion";
@@ -11,10 +13,11 @@ import TransitionArea from "../../src/components/dashboard/transtionArea";
 import ContentEditor from "../../src/components/projects/editor/contentEditor";
 import Banner from "../../src/components/global/banner";
 import FooterBackground from "../../src/components/global/footerBackground";
-//components
 //data
 import { theme } from "../../data/theme";
 import { tabsData } from "../../data/projects";
+//helpers
+import { createObject, saveObject, getObject } from "../../helpers/handleMoralis";
 
 const crumbs = [
     {
@@ -35,7 +38,9 @@ const masterCopy = {
 //page
 export default function(){
     //state
-    const[currentTab, setCurrentTab] = useState("Rules & Settings");
+    const{user} = useMoralis();
+    const { isSaving, error: errorSave, save } = useNewMoralisObject('Project');
+    const[currentTab, setCurrentTab] = useState("Project Info");
     const[project, setProject] = useState({
         name: "",
         description: "",
@@ -43,17 +48,25 @@ export default function(){
         type: "tcg",
         url: "none"
     });
+    // const { data : dataQuery, error : errorQuery, isLoading } = useMoralisQuery('Project');
+
+    const { fetch, data : dataQuery, error : errorQuery, isLoading } = useMoralisQuery('Project', query =>
+        query.equalTo("name", project.name)
+    );
+
     //functions
 
     //Main project settings
-    const saveMetaSection = (e)=>{
+    const saveMetaSection = async(e)=>{
         console.log("save");
         console.log(project);
         //set a project id
         
         //save to user data via backend
+        const saveProject = await save(project);
 
         //return save state or error
+        console.log(saveProject);
 
     };
     const renderFromSections = (sections)=>{
@@ -142,10 +155,30 @@ export default function(){
         ]
     };
 
+    //Load Project
+    
+
     //lifecycle
+    useEffect(async()=>{
+        //const results = await getObject("Project", project.name);
+        // console.log(user);
+        //console.log(results);
+        // console.log("running fetch");
+        // console.log(project.name);
+        // fetch;
+        // find();
+
+        let response = await fetch(`/api/search?type=Project&name=${project.name}`);
+
+        //let dataResults = await response.json();
+        console.log(response);
+
+    },[project.name]);
+
     useEffect(()=>{
-        console.log(tabsData);
-    },[]);
+        // console.log("the data");
+        // console.log(dataQuery);
+    },[dataQuery]);
 
     //render
     return(
@@ -163,6 +196,10 @@ export default function(){
                         {/* Project Info */}
                         {currentTab === "Project Info" && (
                             <TransitionArea comparison={currentTab} name="Project Info">
+                                {isSaving && <p>Saving, please wait.</p>}
+                                <p>Query Data</p>
+                                <p>{JSON.stringify(dataQuery, null, 2)}</p>
+                                <button onClick={()=>{fetch}}>Search</button>
                                 <ToggleArea title="Project Main Details">{renderFromSections(projectFormsData.sections)}</ToggleArea>
                             </TransitionArea>
                         )}

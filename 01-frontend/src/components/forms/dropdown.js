@@ -1,8 +1,8 @@
 export default function Dropdown({options, id, name, settings, handleChange}){
     //functions
     const renderOptions =()=>{
-        const render = options.map((option)=>{
-            return(<option key={option.key} value={option.value}>{option.name}</option>)
+        const render = options.map((option, index)=>{
+            return(<option key={index} value={option.value}>{option.name}</option>)
         });
         return render;
     };
