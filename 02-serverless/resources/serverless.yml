@@ -10,27 +10,6 @@ provider:
   deploymentBucket: 
     name: serverless.projects.carlos-developer
     
-  # Making an environment variable that will be available to all the functions in this service
-  environment:
-    tableNameProjects: ${self:custom.tableNameProjects}
-    tableNameItems: ${self:custom.tableNameItems}
-
-  # AWS Permissions with roles
-  # This role for example allows this lambda to have all permissions on bucket tvents
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - "dynamodb:*"
-      Resource:
-        - { "Fn::GetAtt": ["ProjectsTable", "Arn" ] }
-        - { "Fn::Join": [ "/", [ 
-            { "Fn::GetAtt": ["ProjectsTable", "Arn" ] }, "index", "UserIndex" 
-          ]]}
-    - Effect: "Allow"
-      Action:
-        - "s3:*"
-      Resource: { "Fn::Join": ["", ["arn:aws:s3:::serverless.projects.carlos-developer", "/*" ] ] }
-
 custom:
   tableNameProjects: projects-${sls:stage}
   tableNameItems: items-${sls:stage}

@@ -1,0 +1,65 @@
+service: neptune-queries-dashboard
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  stage: dev
+  region: us-east-1
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  deploymentBucket: 
+    name: serverless.projects.carlos-developer
+
+  environment:
+    tableNameProjects: ${self:custom.tableNameProjects}
+
+  iamRoleStatements:
+
+    - Effect: Allow
+      Action:
+        - "dynamodb:*"
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/*"
+
+custom:
+  tableNameProjects: projects-${sls:stage}
+
+functions:
+  savedata_function:
+    handler: functions/projects.save
+    memorySize: 1024
+    timeout: 30
+    events:
+      - http:
+          path: /save
+          method: post
+          cors: true
+  
+  getdata_function:
+    handler: functions/projects.get
+    memorySize: 1024
+    timeout: 120
+    events:
+      - http:
+          path: /get
+          method: get
+          cors: true
+
+  querydata_function:
+    handler: functions/projects.query
+    memorySize: 1024
+    timeout: 120
+    events:
+      - http:
+          path: /query
+          method: get
+          cors: true
+
+  deletedata_function:
+    handler: functions/projects.delete
+    memorySize: 1024
+    timeout: 30
+    events:
+      - http:
+          path: /delete
+          method: delete
+          cors: true
