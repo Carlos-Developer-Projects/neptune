@@ -42,7 +42,7 @@
     "ItemsTable": {
       "Type": "AWS::DynamoDB::Table",
       "Properties": {
-        "TableName": "projects-dev",
+        "TableName": "items-dev",
         "AttributeDefinitions": [
           {
             "AttributeName": "user",

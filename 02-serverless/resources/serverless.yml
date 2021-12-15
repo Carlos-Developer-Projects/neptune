@@ -39,7 +39,7 @@ resources:
     ItemsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:custom.tableNameProjects}
+        TableName: ${self:custom.tableNameItems}
         AttributeDefinitions:
           - AttributeName: user
             AttributeType: S

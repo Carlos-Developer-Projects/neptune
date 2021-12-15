@@ -59,7 +59,7 @@
           "ItemsTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
-              "TableName": "projects-dev",
+              "TableName": "items-dev",
               "AttributeDefinitions": [
                 {
                   "AttributeName": "user",
@@ -152,7 +152,7 @@
         "ItemsTable": {
           "Type": "AWS::DynamoDB::Table",
           "Properties": {
-            "TableName": "projects-dev",
+            "TableName": "items-dev",
             "AttributeDefinitions": [
               {
                 "AttributeName": "user",
@@ -210,7 +210,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/neptune-resources/dev/1639606507959-2021-12-15T22:15:07.959Z",
+    "artifactDirectoryName": "serverless/neptune-resources/dev/1639607130511-2021-12-15T22:25:30.511Z",
     "artifact": ""
   }
 }
