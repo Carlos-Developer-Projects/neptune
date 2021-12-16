@@ -5,4 +5,4 @@ tasks:
       echo 'TODO: start app'
 ports:
   - port: 3035
-    onOpen: open-preview
+    onOpen: open-browser

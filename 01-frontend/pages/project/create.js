@@ -1,6 +1,7 @@
 //depedencies
 import { useEffect, useState, useRef, useMemo } from "react";
-import { useMoralis, useNewMoralisObject, useMoralisQuery } from "react-moralis";
+import { useMoralis, useMoralisFile } from "react-moralis";
+import { v4 as uuidv4 } from 'uuid';
 //layout
 import Dashboard from "../../src/layouts/dashboard";
 //components
@@ -13,12 +14,11 @@ import TransitionArea from "../../src/components/dashboard/transtionArea";
 import ContentEditor from "../../src/components/projects/editor/contentEditor";
 import Banner from "../../src/components/global/banner";
 import FooterBackground from "../../src/components/global/footerBackground";
+//helpers
+import {axiosSave} from "../../helpers/handleAxios";
 //data
 import { theme } from "../../data/theme";
 import { tabsData } from "../../data/projects";
-//helpers
-import { createObject, saveObject, getObject } from "../../helpers/handleMoralis";
-
 const crumbs = [
     {
       "text": "Home",
@@ -38,35 +38,45 @@ const masterCopy = {
 //page
 export default function(){
     //state
-    const{user} = useMoralis();
-    const { isSaving, error: errorSave, save } = useNewMoralisObject('Project');
+    const {
+        error,
+        isUploading,
+        moralisFile,
+        saveFile,
+      } = useMoralisFile();
+    const{ user, isAuthenticated } = useMoralis();
     const[currentTab, setCurrentTab] = useState("Project Info");
     const[project, setProject] = useState({
+        id: uuidv4(),
         name: "",
         description: "",
         image: "",
         type: "tcg",
         url: "none"
     });
-    // const { data : dataQuery, error : errorQuery, isLoading } = useMoralisQuery('Project');
-
-    const { fetch, data : dataQuery, error : errorQuery, isLoading } = useMoralisQuery('Project', query =>
-        query.equalTo("name", project.name)
-    );
-
     //functions
 
     //Main project settings
     const saveMetaSection = async(e)=>{
-        console.log("save");
+        e.preventDefault();
+
+        //find images and store them to IPFS with Moralis
         console.log(project);
-        //set a project id
-        
+
+        //replace the reference to the images in the project to the moralis IPFS links
+        saveFile(`${project.id}_logo`, project.logo, { saveIPFS: true });
+        console.log(moralisFile.ipfs());
+        console.log(moralisFile.hash());
+
+ 
+        //Set this project to belong to the user
+        project.user = user.id;
+
         //save to user data via backend
-        const saveProject = await save(project);
+        //const results = await axiosSave(project, null);
 
         //return save state or error
-        console.log(saveProject);
+        //console.log(results);
 
     };
     const renderFromSections = (sections)=>{
@@ -160,25 +170,11 @@ export default function(){
 
     //lifecycle
     useEffect(async()=>{
-        //const results = await getObject("Project", project.name);
-        // console.log(user);
-        //console.log(results);
-        // console.log("running fetch");
-        // console.log(project.name);
-        // fetch;
-        // find();
-
-        let response = await fetch(`/api/search?type=Project&name=${project.name}`);
-
-        //let dataResults = await response.json();
-        console.log(response);
-
-    },[project.name]);
+    },[]);
 
     useEffect(()=>{
-        // console.log("the data");
-        // console.log(dataQuery);
-    },[dataQuery]);
+        console.log(user);
+    },[isAuthenticated]);
 
     //render
     return(
@@ -196,10 +192,6 @@ export default function(){
                         {/* Project Info */}
                         {currentTab === "Project Info" && (
                             <TransitionArea comparison={currentTab} name="Project Info">
-                                {isSaving && <p>Saving, please wait.</p>}
-                                <p>Query Data</p>
-                                <p>{JSON.stringify(dataQuery, null, 2)}</p>
-                                <button onClick={()=>{fetch}}>Search</button>
                                 <ToggleArea title="Project Main Details">{renderFromSections(projectFormsData.sections)}</ToggleArea>
                             </TransitionArea>
                         )}

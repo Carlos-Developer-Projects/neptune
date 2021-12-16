@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Dashboard from '../../src/layouts/dashboard';
 //components
 import Meta from "../../src/components/global/meta";
-import PageHeader from "../../src/components/dashboard/PageHeader";
+import PageHeader from "../../src/components/dashboard/pageHeader";
 import SectionHeader from "../../src/components/dashboard/SectionHeader";
 import MainContainer from "../../src/components/dashboard/mainContainer";
 import PreviewLightRow from "../../src/components/projects/preview/preview_light_row";
